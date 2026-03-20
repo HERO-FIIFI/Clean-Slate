@@ -1,0 +1,23 @@
+[package]
+name = "clean-slate"
+version = "1.0.0"
+description = "Clean Slate — Mindful AI Learning"
+authors = ["Clean Slate"]
+edition = "2021"
+
+[lib]
+name = "clean_slate_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[bin]]
+name = "clean-slate"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["shell-sidecar"] }
+tauri-plugin-shell = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-primary:   #F8F7F4;
+  --bg-secondary: #FFFFFF;
+  --bg-glass:     rgba(252, 251, 248, 0.72);
+  --bg-stone:     rgba(255, 255, 255, 0.6);
+
+  --text-primary:   #1C1C1E;
+  --text-secondary: #6B6B6B;
+  --text-muted:     #A8A8A8;
+
+  --accent:       #5b7c99;
+  --accent-light: #7d9ab5;
+  --accent-warm:  #8C7B6B;
+
+  --border:       rgba(0, 0, 0, 0.07);
+  --border-stone: rgba(0, 0, 0, 0.05);
+
+  --shadow:       0 2px 16px rgba(0, 0, 0, 0.04);
+  --shadow-glass: 0 8px 40px rgba(0, 0, 0, 0.06);
+  --shadow-stone: 0 4px 24px rgba(0, 0, 0, 0.05);
+
+  --blur:   16px;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --font-serif: 'Lora', Georgia, serif;
+  --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.65;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ─── Glass Panel ──────────────────────────────────── */
+.glass-panel {
+  background: var(--bg-glass);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-glass);
+}
+
+/* ─── Buttons ──────────────────────────────────────── */
+.btn {
+  padding: 11px 26px;
+  border: none;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(91, 124, 153, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 18px rgba(91, 124, 153, 0.35);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #fff;
+  transform: translateY(-1px);
+}
+
+/* Ritual confidence buttons */
+.btn-ritual {
+  flex: 1;
+  padding: 16px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  font-family: var(--font-serif);
+  font-size: 15px;
+  color: var(--text-secondary);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.btn-ritual:hover {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: var(--accent);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(91, 124, 153, 0.12);
+}
+
+.btn-ritual.selected {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(91, 124, 153, 0.3);
+}
+
+.btn-ritual .ritual-label {
+  font-size: 11px;
+  font-family: var(--font-sans);
+  opacity: 0.7;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* ─── Input ────────────────────────────────────────── */
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: inherit;
+  transition: var(--transition);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(91, 124, 153, 0.1);
+}
+
+/* ─── Container ────────────────────────────────────── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ─── Animations ───────────────────────────────────── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-out-up {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-16px); }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.25; transform: scaleX(1); }
+  50%       { opacity: 0.55; transform: scaleX(1.015); }
+}
+
+@keyframes pulse-bar {
+  0%, 100% { transform: translateX(-80%); }
+  50%       { transform: translateX(260%); }
+}
+
+@keyframes soft-appear {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-in {
+  animation: fade-in-up 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* ─── Privacy badge ────────────────────────────────── */
+.privacy-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.5);
+}

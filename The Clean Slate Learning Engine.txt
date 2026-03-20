@@ -1,0 +1,14 @@
+1. The "Clean Slate" Learning Engine
+Instead of a typical educational platform, build a minimalist, AI-powered knowledge ritual tool. This focuses on deep work and intentional learning rather than gamification.
+
+The Problem: Most learning apps use streaks and badges (gamification) that lead to burnout. Users need a "calm" space for daily knowledge retention.
+
+Core Features:
+
+Context-Aware Questioning: An AI that analyzes a user's uploaded documents (PDFs/Markdown) and generates adaptive questions based on their past performance.
+
+Confidence Tracking: Instead of "Right/Wrong," users rate their confidence, and the algorithm schedules the next review (Spaced Repetition).
+
+Focus Mode UI: A high-end, professional interface using Glassmorphism or a "Mindful" design aesthetic (lots of white space, subtle blurs).
+
+Tech Stack: React.js for the frontend, Python (FastAPI) for the backend, and Ollama or vLLM for local LLM orchestration to ensure data privacy.

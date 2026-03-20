@@ -1,0 +1,113 @@
+CLEAN SLATE — REMAINING TASKS
+==============================
+Last updated: 2026-03-20
+
+
+── IMMEDIATE (get it running) ──────────────────────────────
+
+1. Install frontend dependencies
+   cd frontend
+   del package-lock.json
+   npm install --legacy-peer-deps
+
+2. Set up Python backend
+   cd backend
+   python -m venv venv
+   venv\Scripts\activate
+   pip install -r requirements.txt
+   copy .env.example .env
+
+3. Install Ollama (if using Ollama mode)
+   - Download from https://ollama.com
+   - Run: ollama serve
+   - Model will be pulled automatically from the Setup screen
+
+4. Start the backend
+   cd backend
+   venv\Scripts\activate
+   uvicorn app.main:app --reload --port 8000
+
+5. Start the frontend
+   cd frontend
+   npm run dev
+   → Open http://localhost:3000
+
+
+── BROWSER AI (WebGPU mode) ────────────────────────────────
+
+6. Test WebGPU mode end-to-end
+   - Open app in Chrome 113+ or Edge 113+
+   - Choose "Browser AI" on the Setup screen
+   - Pick a model (Balanced 3B recommended)
+   - Upload a PDF and confirm questions are generated in-browser
+
+7. Verify model caching
+   - After first run, reload the page
+   - Model should load instantly from browser cache (no re-download)
+
+
+── TAURI DESKTOP APP ───────────────────────────────────────
+
+8. Install Rust (one-time)
+   https://rustup.rs
+
+9. Build the Python backend into a sidecar binary
+   cd backend
+   pip install pyinstaller
+   python build_sidecar.py
+   → Produces: src-tauri/binaries/backend-<platform>.exe
+
+10. Install Tauri CLI and run in dev mode
+    cd frontend
+    npm install --legacy-peer-deps
+    npm run tauri dev
+
+11. Build the final desktop release
+    npm run tauri build
+    → Output: src-tauri/target/release/bundle/
+    → Windows: .msi and .exe installers
+    → macOS:   .dmg
+    → Linux:   .AppImage and .deb
+
+
+── NICE TO HAVE (polish) ───────────────────────────────────
+
+12. App icon
+    - Place a 1024x1024 PNG at src-tauri/icons/app-icon.png
+    - Run: npm run tauri icon
+    - Tauri auto-generates all platform sizes
+
+13. Soundscapes (ambient audio)
+    - Add optional ambient sound toggle to FocusMode
+    - Suggested: brown noise or soft rain (royalty-free)
+    - Library: howler.js  (npm install howler)
+
+14. Answer reveal / "Contextual Reveal"
+    - Currently hint shows source context text
+    - Future: highlight the exact passage in the original PDF
+    - Requires storing chunk byte offsets in the Question model
+
+15. Session summary screen
+    - After Focus session ends show: questions answered, avg confidence, next due date
+    - POST /api/reviews/session/complete already exists — wire up the UI
+
+16. Settings page
+    - Switch LLM mode (Ollama ↔ Browser AI) without re-running Setup
+    - Change WebLLM model
+    - Clear the database / reset all progress
+
+17. Multi-document focus sessions
+    - Currently sessions pull from all documents equally
+    - Add ability to start a session from one specific Knowledge Stone
+
+
+── KNOWN LIMITATIONS ───────────────────────────────────────
+
+- WebGPU requires Chrome/Edge 113+ on desktop (not Firefox, not Safari yet)
+- Ollama mode requires Ollama installed separately by the user
+- PyInstaller sidecar must be built on the same OS you ship for
+  (build Windows .exe on Windows, macOS .dmg on macOS)
+- Large PDFs are capped at 4 chunks × 800 words = ~3200 words processed
+  (increase MAX_CHUNKS in backend/app/services/parser.py if needed)
+- SM-2 spaced repetition resets interval on confidence < 3 (Hazy)
+  — intentional, matches original SM-2 spec
