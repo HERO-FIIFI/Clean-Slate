@@ -1,5 +1,5 @@
 1. The "Clean Slate" Learning Engine
-Instead of a typical educational platform, build a minimalist, AI-powered knowledge ritual tool. This focuses on deep work and intentional learning rather than gamification.
+Instead of a typical educational platform, a minimalist, AI-powered knowledge ritual tool. This focuses on deep work and intentional learning rather than gamification.
 
 The Problem: Most learning apps use streaks and badges (gamification) that lead to burnout. Users need a "calm" space for daily knowledge retention.
 

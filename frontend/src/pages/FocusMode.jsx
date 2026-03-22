@@ -117,9 +117,9 @@ export default function FocusMode() {
             {showSounds && (
               <div style={{
                 position: 'absolute', top: '32px', right: 0,
-                background: 'rgba(255,255,255,0.95)',
+                background: 'var(--bg-glass)',
                 backdropFilter: 'blur(16px)',
-                border: '1px solid var(--border)',
+                border: '1px solid var(--glass-border)',
                 borderRadius: '12px',
                 padding: '8px',
                 zIndex: 10,
@@ -134,7 +134,7 @@ export default function FocusMode() {
                     style={{
                       display: 'flex', gap: '10px', alignItems: 'center',
                       width: '100%', padding: '8px 12px', border: 'none',
-                      background: sound === s.id ? 'rgba(91,124,153,0.1)' : 'none',
+                      background: sound === s.id ? 'rgba(var(--accent-rgb),0.10)' : 'none',
                       borderRadius: '8px', cursor: 'pointer',
                       fontSize: '13px', color: sound === s.id ? 'var(--accent)' : 'var(--text-primary)',
                       fontFamily: 'var(--font-sans)',

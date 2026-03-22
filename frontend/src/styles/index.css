@@ -6,11 +6,13 @@
   box-sizing: border-box;
 }
 
-:root {
+/* ── Mist (default) ── */
+:root,
+[data-theme="mist"] {
   --bg-primary:   #F8F7F4;
   --bg-secondary: #FFFFFF;
   --bg-glass:     rgba(252, 251, 248, 0.72);
-  --bg-stone:     rgba(255, 255, 255, 0.6);
+  --bg-stone:     rgba(255, 255, 255, 0.60);
 
   --text-primary:   #1C1C1E;
   --text-secondary: #6B6B6B;
@@ -19,21 +21,123 @@
   --accent:       #5b7c99;
   --accent-light: #7d9ab5;
   --accent-warm:  #8C7B6B;
+  --accent-rgb:   91, 124, 153;
 
-  --border:       rgba(0, 0, 0, 0.07);
-  --border-stone: rgba(0, 0, 0, 0.05);
+  --border:        rgba(0, 0, 0, 0.07);
+  --border-stone:  rgba(0, 0, 0, 0.05);
+  --glass-border:  rgba(255, 255, 255, 0.45);
 
-  --shadow:       0 2px 16px rgba(0, 0, 0, 0.04);
-  --shadow-glass: 0 8px 40px rgba(0, 0, 0, 0.06);
-  --shadow-stone: 0 4px 24px rgba(0, 0, 0, 0.05);
+  --shadow:        0 2px 16px rgba(0, 0, 0, 0.04);
+  --shadow-glass:  0 8px 40px rgba(0, 0, 0, 0.06);
+  --shadow-stone:  0 4px 24px rgba(0, 0, 0, 0.05);
 
-  --blur:   16px;
-  --radius: 16px;
-  --radius-sm: 10px;
+  --blur:       16px;
+  --radius:     16px;
+  --radius-sm:  10px;
   --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 
   --font-serif: 'Lora', Georgia, serif;
   --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ── Rose ── */
+[data-theme="rose"] {
+  --bg-primary:   #FAF4F1;
+  --bg-secondary: #FFFFFF;
+  --bg-glass:     rgba(252, 246, 244, 0.75);
+  --bg-stone:     rgba(255, 242, 240, 0.65);
+
+  --text-primary:   #1E1416;
+  --text-secondary: #6B5058;
+  --text-muted:     #B89AA8;
+
+  --accent:       #9B6A78;
+  --accent-light: #B8899A;
+  --accent-warm:  #9B7868;
+  --accent-rgb:   155, 106, 120;
+
+  --border:       rgba(0, 0, 0, 0.06);
+  --border-stone: rgba(0, 0, 0, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.52);
+
+  --shadow:       0 2px 16px rgba(80, 30, 40, 0.04);
+  --shadow-glass: 0 8px 40px rgba(80, 30, 40, 0.07);
+  --shadow-stone: 0 4px 24px rgba(80, 30, 40, 0.05);
+}
+
+/* ── Midnight ── */
+[data-theme="midnight"] {
+  --bg-primary:   #0C1018;
+  --bg-secondary: #121824;
+  --bg-glass:     rgba(16, 22, 38, 0.82);
+  --bg-stone:     rgba(22, 32, 55, 0.55);
+
+  --text-primary:   #DCE8F5;
+  --text-secondary: #8AAAC0;
+  --text-muted:     #3A6080;
+
+  --accent:       #5B8FD4;
+  --accent-light: #7AAEF0;
+  --accent-warm:  #6B7BAE;
+  --accent-rgb:   91, 143, 212;
+
+  --border:       rgba(150, 200, 255, 0.07);
+  --border-stone: rgba(150, 200, 255, 0.04);
+  --glass-border: rgba(150, 200, 255, 0.13);
+
+  --shadow:       0 2px 16px rgba(0, 0, 0, 0.30);
+  --shadow-glass: 0 8px 40px rgba(0, 0, 0, 0.45);
+  --shadow-stone: 0 4px 24px rgba(0, 0, 0, 0.28);
+}
+
+/* ── Dusk ── */
+[data-theme="dusk"] {
+  --bg-primary:   #18120C;
+  --bg-secondary: #221A10;
+  --bg-glass:     rgba(38, 28, 16, 0.82);
+  --bg-stone:     rgba(55, 42, 22, 0.55);
+
+  --text-primary:   #EDE6DA;
+  --text-secondary: #A09070;
+  --text-muted:     #60503A;
+
+  --accent:       #C8924A;
+  --accent-light: #DBA96A;
+  --accent-warm:  #A8785A;
+  --accent-rgb:   200, 146, 74;
+
+  --border:       rgba(255, 200, 120, 0.08);
+  --border-stone: rgba(255, 200, 120, 0.05);
+  --glass-border: rgba(255, 200, 120, 0.16);
+
+  --shadow:       0 2px 16px rgba(0, 0, 0, 0.28);
+  --shadow-glass: 0 8px 40px rgba(0, 0, 0, 0.42);
+  --shadow-stone: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* ── Forest ── */
+[data-theme="forest"] {
+  --bg-primary:   #0E1510;
+  --bg-secondary: #162018;
+  --bg-glass:     rgba(20, 35, 24, 0.82);
+  --bg-stone:     rgba(28, 50, 32, 0.55);
+
+  --text-primary:   #D8E8DC;
+  --text-secondary: #88A890;
+  --text-muted:     #507858;
+
+  --accent:       #6BA07A;
+  --accent-light: #8BBE9A;
+  --accent-warm:  #7B9B68;
+  --accent-rgb:   107, 160, 122;
+
+  --border:       rgba(180, 255, 200, 0.07);
+  --border-stone: rgba(180, 255, 200, 0.04);
+  --glass-border: rgba(180, 255, 200, 0.13);
+
+  --shadow:       0 2px 16px rgba(0, 0, 0, 0.28);
+  --shadow-glass: 0 8px 40px rgba(0, 0, 0, 0.42);
+  --shadow-stone: 0 4px 24px rgba(0, 0, 0, 0.25);
 }
 
 body {
@@ -54,7 +158,7 @@ body {
   background: var(--bg-glass);
   backdrop-filter: blur(var(--blur));
   -webkit-backdrop-filter: blur(var(--blur));
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-glass);
 }
@@ -83,13 +187,13 @@ body {
 .btn-primary {
   background: var(--accent);
   color: #fff;
-  box-shadow: 0 2px 12px rgba(91, 124, 153, 0.3);
+  box-shadow: 0 2px 12px rgba(var(--accent-rgb), 0.30);
 }
 
 .btn-primary:hover:not(:disabled) {
   background: var(--accent-light);
   transform: translateY(-1px);
-  box-shadow: 0 4px 18px rgba(91, 124, 153, 0.35);
+  box-shadow: 0 4px 18px rgba(var(--accent-rgb), 0.35);
 }
 
 .btn-secondary {
@@ -123,18 +227,18 @@ body {
 }
 
 .btn-ritual:hover {
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--glass-border);
   border-color: var(--accent);
   color: var(--text-primary);
   transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(91, 124, 153, 0.12);
+  box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.12);
 }
 
 .btn-ritual.selected {
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
-  box-shadow: 0 4px 20px rgba(91, 124, 153, 0.3);
+  box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.30);
 }
 
 .btn-ritual .ritual-label {
@@ -161,7 +265,7 @@ body {
 .input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(91, 124, 153, 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.10);
 }
 
 /* ─── Container ────────────────────────────────────── */

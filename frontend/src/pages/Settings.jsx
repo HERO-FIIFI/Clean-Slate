@@ -3,13 +3,20 @@ import { useNavigate } from 'react-router-dom'
 import { getLLMMode, setLLMMode, LLM_MODES, getWebLLMModelId, setWebLLMModelId } from '../services/llm'
 import { WEBLLM_MODELS } from '../services/webllm'
 import { resetAllData, resetQuestions } from '../services/api'
+import { THEMES, getTheme, setTheme } from '../services/theme'
 
 export default function Settings() {
   const navigate = useNavigate()
-  const [llmMode, setMode]         = useState(getLLMMode())
-  const [modelId, setModelId]      = useState(getWebLLMModelId())
+  const [llmMode, setMode]          = useState(getLLMMode())
+  const [modelId, setModelId]       = useState(getWebLLMModelId())
   const [resetState, setResetState] = useState('idle')  // idle | confirm-all | confirm-q | done
-  const [saved, setSaved]          = useState(false)
+  const [saved, setSaved]           = useState(false)
+  const [activeTheme, setActiveTheme] = useState(getTheme())
+
+  const handleTheme = (id) => {
+    setTheme(id)
+    setActiveTheme(id)
+  }
 
   const handleSave = () => {
     setLLMMode(llmMode)
@@ -39,6 +46,59 @@ export default function Settings() {
       <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '30px', fontWeight: 400, margin: '24px 0 40px' }}>
         Settings
       </h1>
+
+      {/* ── Appearance ── */}
+      <Section title="Appearance">
+        <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '20px', lineHeight: 1.7 }}>
+          Choose a colour mode. All themes use the same glassmorphism design.
+        </p>
+        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+          {THEMES.map(t => (
+            <button
+              key={t.id}
+              onClick={() => handleTheme(t.id)}
+              style={{
+                display: 'flex', flexDirection: 'column', alignItems: 'center',
+                gap: '8px', background: 'none', border: 'none', cursor: 'pointer',
+                padding: '4px',
+              }}
+            >
+              {/* Swatch */}
+              <div style={{
+                width: '44px', height: '44px', borderRadius: '50%',
+                background: t.swatch.bg,
+                border: activeTheme === t.id
+                  ? `3px solid var(--accent)`
+                  : '3px solid transparent',
+                outline: activeTheme === t.id
+                  ? '2px solid var(--accent)'
+                  : '2px solid var(--border)',
+                outlineOffset: '2px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                transition: 'all 0.2s',
+                position: 'relative', overflow: 'hidden',
+              }}>
+                {/* Accent colour arc */}
+                <div style={{
+                  position: 'absolute', bottom: 0, right: 0,
+                  width: '22px', height: '22px',
+                  borderRadius: '50% 0 50% 0',
+                  background: t.swatch.accent,
+                  opacity: 0.85,
+                }} />
+              </div>
+              <span style={{
+                fontSize: '11px',
+                color: activeTheme === t.id ? 'var(--accent)' : 'var(--text-muted)',
+                fontWeight: activeTheme === t.id ? 500 : 400,
+                transition: 'color 0.2s',
+              }}>
+                {t.label}
+              </span>
+            </button>
+          ))}
+        </div>
+      </Section>
 
       {/* ── AI Engine ── */}
       <Section title="AI Engine">
@@ -72,7 +132,7 @@ export default function Settings() {
                 padding: '11px 14px', marginBottom: '8px', borderRadius: '10px',
                 cursor: 'pointer',
                 border: `1px solid ${modelId === m.id ? 'var(--accent)' : 'var(--border)'}`,
-                background: modelId === m.id ? 'rgba(91,124,153,0.06)' : 'rgba(255,255,255,0.5)',
+                background: modelId === m.id ? 'rgba(var(--accent-rgb),0.06)' : 'rgba(255,255,255,0.5)',
                 transition: 'all 0.2s',
               }}>
                 <input type="radio" name="model" value={m.id}
@@ -173,7 +233,7 @@ function ModeRow({ selected, onClick, title, sub }) {
       display: 'flex', alignItems: 'center', gap: '12px',
       padding: '12px 14px', borderRadius: '10px', cursor: 'pointer',
       border: `1px solid ${selected ? 'var(--accent)' : 'var(--border)'}`,
-      background: selected ? 'rgba(91,124,153,0.06)' : 'rgba(255,255,255,0.5)',
+      background: selected ? 'rgba(var(--accent-rgb),0.06)' : 'rgba(255,255,255,0.5)',
       transition: 'all 0.2s',
     }}>
       <div style={{

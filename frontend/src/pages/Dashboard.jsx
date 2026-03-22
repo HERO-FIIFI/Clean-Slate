@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { listDocuments, getPendingCount } from '../services/api'
+import { THEMES, getTheme, setTheme } from '../services/theme'
 
 
 
@@ -10,7 +11,7 @@ function RipenessRing({ due, total, size = 64 }) {
   const circumference = 2 * Math.PI * radius
   const pct = total > 0 ? Math.min(due / total, 1) : 0
   const offset = circumference * (1 - pct)
-  const color = pct === 0 ? '#A8A8A8' : pct < 0.5 ? '#7d9ab5' : '#5b7c99'
+  const color = pct === 0 ? 'var(--text-muted)' : pct < 0.5 ? 'var(--accent-light)' : 'var(--accent)'
 
   return (
     <svg width={size} height={size} style={{ transform: 'rotate(-90deg)' }}>
@@ -41,7 +42,7 @@ function KnowledgeStone({ doc, onBegin }) {
         background: 'rgba(255,255,255,0.6)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
-        border: `1px solid ${isDue ? 'rgba(91,124,153,0.25)' : 'rgba(0,0,0,0.05)'}`,
+        border: `1px solid ${isDue ? 'rgba(var(--accent-rgb),0.25)' : 'var(--border-stone)'}`,
         borderRadius: '20px',
         padding: '28px 24px',
         cursor: canBegin ? 'pointer' : 'default',
@@ -50,8 +51,8 @@ function KnowledgeStone({ doc, onBegin }) {
         flexDirection: 'column',
         gap: '16px',
         boxShadow: hovered && canBegin
-          ? '0 8px 32px rgba(91,124,153,0.18)'
-          : isDue ? '0 4px 24px rgba(91,124,153,0.12)' : '0 2px 12px rgba(0,0,0,0.04)',
+          ? 'rgba(var(--accent-rgb),0.18) 0 8px 32px'
+          : isDue ? 'rgba(var(--accent-rgb),0.12) 0 4px 24px' : 'var(--shadow)',
         opacity: isProcessing ? 0.7 : 1,
         transform: hovered && canBegin ? 'translateY(-3px)' : 'translateY(0)',
         position: 'relative', overflow: 'hidden',
@@ -95,7 +96,7 @@ function KnowledgeStone({ doc, onBegin }) {
         {isDue && !isProcessing && (
           <span style={{
             fontSize: '11px', fontWeight: 500, color: 'var(--accent)',
-            background: 'rgba(91,124,153,0.08)', padding: '3px 9px', borderRadius: '999px',
+            background: 'rgba(var(--accent-rgb),0.08)', padding: '3px 9px', borderRadius: '999px',
           }}>
             {doc.due_count} due
           </span>
@@ -143,7 +144,13 @@ export default function Dashboard() {
   const [documents, setDocuments] = useState([])
   const [totalDue, setTotalDue] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [activeTheme, setActiveTheme] = useState(getTheme())
   const navigate = useNavigate()
+
+  const handleTheme = (id) => {
+    setTheme(id)
+    setActiveTheme(id)
+  }
 
   useEffect(() => {
     Promise.all([listDocuments(), getPendingCount()])
@@ -178,6 +185,30 @@ export default function Dashboard() {
           </p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          {/* Theme dots */}
+          <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+            {THEMES.map(t => (
+              <button
+                key={t.id}
+                onClick={() => handleTheme(t.id)}
+                title={t.label}
+                style={{
+                  width: '16px', height: '16px', borderRadius: '50%',
+                  background: t.swatch.bg,
+                  border: activeTheme === t.id
+                    ? `2px solid var(--accent)`
+                    : `2px solid var(--border)`,
+                  boxShadow: activeTheme === t.id
+                    ? '0 0 0 1.5px var(--accent)'
+                    : 'none',
+                  cursor: 'pointer', padding: 0,
+                  transition: 'all 0.2s',
+                  outline: 'none',
+                  flexShrink: 0,
+                }}
+              />
+            ))}
+          </div>
           <span className="privacy-badge">⬤ Local only</span>
           <button onClick={() => navigate('/settings')} style={{
             background: 'none', border: 'none', cursor: 'pointer',
@@ -200,8 +231,8 @@ export default function Dashboard() {
         <div
           className="animate-in"
           style={{
-            background: 'linear-gradient(135deg, rgba(91,124,153,0.12) 0%, rgba(91,124,153,0.04) 100%)',
-            border: '1px solid rgba(91,124,153,0.2)',
+            background: 'linear-gradient(135deg, rgba(var(--accent-rgb),0.12) 0%, rgba(var(--accent-rgb),0.04) 100%)',
+            border: '1px solid rgba(var(--accent-rgb),0.20)',
             borderRadius: '20px',
             padding: '28px 32px',
             marginBottom: '40px',
