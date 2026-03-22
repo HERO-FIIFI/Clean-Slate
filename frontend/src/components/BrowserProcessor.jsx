@@ -61,7 +61,7 @@ export default function BrowserProcessor({ documents, onDone, onClose }) {
           if (cancelled.current) return
           const questions = await generateQuestions(chunk.text, chunk.context, 3)
           for (const q of questions) {
-            await createQuestion(doc.id, q.question, `From: ${doc.name} (${q.context})`)
+            await createQuestion(doc.id, q.question, `From: ${doc.name} (${q.context})`, chunk.text.slice(0, 600))
             totalCreated++
           }
         }
